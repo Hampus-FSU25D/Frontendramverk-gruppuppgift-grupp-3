@@ -42,6 +42,10 @@ Målet är att bygga en enkel och tydlig webbapp där:
 
 [Öppna projektets wireframe i Stitch](https://stitch.withgoogle.com/projects/444867321747387746)
 
+## ER-Diagram
+
+![ER-diagram](./ER-diagram.png)
+
 ## Installation
 
 Projektet körs lokalt med Node.js och npm.
