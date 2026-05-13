@@ -1,0 +1,54 @@
+:root {
+  /* Base */
+  --color-background: #fffdf7;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fefbea;
+
+  /* Text */
+  --color-text: #2f2f35;
+  --color-text-muted: #706a70;
+
+  /* Brand palette */
+  --color-primary: #ca6180;
+  --color-primary-dark: #a94b67;
+  --color-primary-light: #fcb7c7;
+
+  --color-secondary: #9ed3dc;
+  --color-secondary-dark: #78b8c4;
+  --color-secondary-light: #e8f6f8;
+
+  --color-accent: #fefd99;
+  --color-accent-dark: #e8df65;
+  --color-accent-light: #fffed1;
+
+  /* UI */
+  --color-border: #eadde2;
+  --color-border-strong: #d9b8c3;
+
+  /* States */
+  --color-error: #ca6180;
+  --color-error-bg: #fce8ee;
+
+  --color-warning: #fefd99;
+  --color-warning-bg: #fffed1;
+
+  --color-info: #9ed3dc;
+  --color-info-bg: #e8f6f8;
+
+  --color-success: #8fcb9b;
+  --color-success-bg: #e8f7ec;
+
+  /* Shadows */
+  --shadow-soft: 0 12px 30px rgba(202, 97, 128, 0.12);
+  --shadow-card: 0 6px 18px rgba(47, 47, 53, 0.08);
+  --shadow-button: 0 8px 22px rgba(202, 97, 128, 0.18);
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --max-width: 1500px;
+}
