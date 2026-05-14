@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import LoginPrompt from "../auth/LoginPrompt";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navbar from "./Navbar";

@@ -1,21 +1,15 @@
-.login-prompt-backdrop {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: rgb(0 0 0 / 45%);
-  padding: 1.5rem;
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: "Segoe UI", sans-serif;
 }
 
-.login-prompt {
-  width: min(100%, 24rem);
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1.5rem;
+button,
+input {
+  font: inherit;
 }
 
-.login-prompt__actions {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
+* {
+  box-sizing: border-box;
 }
