@@ -1,8 +1,14 @@
-export default function RecipeCard (){
-    return (
+export default function RecipeCard({ recipe }) {
+  return (
     <article>
-        <h2>Receptnamn</h2>
-        <p>Receptbeskrivning</p>
+      <img
+        src={recipe.image}
+        alt={recipe.title}
+        width="250"
+      />
+      <h2>{recipe.title}</h2>
+      <p>{recipe.description}</p>
+      <button>Läs recept</button>
     </article>
-    )
+  );
 }
