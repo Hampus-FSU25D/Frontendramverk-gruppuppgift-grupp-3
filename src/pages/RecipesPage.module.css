@@ -1,0 +1,17 @@
+.recipesPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #4b2e2e;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
