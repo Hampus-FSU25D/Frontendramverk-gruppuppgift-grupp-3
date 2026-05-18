@@ -9,3 +9,7 @@
   object-fit: cover;
   display: block;
 }
+.recipeCard:hover {
+  transform: translateY(-4px);
+  transition: 0.2s ease;
+}
