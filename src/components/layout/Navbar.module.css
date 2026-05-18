@@ -1,0 +1,59 @@
+.mainNav {
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+  border-top: 2px solid var( --color-border);
+  backdrop-filter: blur(8px);
+  background-color: var( --color-background); 
+  padding: 0.5rem 1.5rem;
+  font-size: 0.7rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+
+}
+.navList {
+  display: flex; 
+  list-style: none; 
+  gap: 6rem;
+  margin: 0;
+  padding: 0;
+}
+.navList li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+  text-align: center;
+  text-decoration: none;
+  color: var(--primary-green); 
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+.navList li a:hover {
+  text-decoration: none; 
+  background-color: var(--color-primary-light);
+  transform: translateY(-2px);
+}
+
+
+@media (max-width: 480px) {
+  .mainNav {
+    padding: 0.5rem 0.75rem; 
+  }
+
+  .navList {
+    gap: 1rem; 
+    justify-content: space-between; 
+    width: 100%;
+  }
+
+  .navList li a {
+    font-size: 0.65rem;
+    padding: 6px 8px;
+  }
+}
