@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./RecipeCard.module.css";
 
 export default function RecipeCard({ recipe }) {
@@ -11,8 +12,12 @@ export default function RecipeCard({ recipe }) {
 
       <div className={styles.recipeContent}>
         <h2>{recipe.title}</h2>
+
         <p>{recipe.description}</p>
-        <button className={styles.recipeButton}>Visa recept</button>
+
+        <Link 
+            className={styles.recipeButton}
+            to={`/recept /${recipe.id}`}>Visa recept</Link>
       </div>
     </article>
   );
