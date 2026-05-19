@@ -15,3 +15,31 @@
   margin-bottom: 2rem;
   font-size: 1rem;
 }
+
+.searchInput {
+  width: 100%;
+  max-width: 420px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e0c7b5;
+  border-radius: 999px;
+  font-size: 1rem;
+  background-color: #fffaf6;
+  color: #4b2e2e;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #8b4a2f;
+  box-shadow: 0 0 0 3px rgba(139, 74, 47, 0.15);
+}
+
+.searchInput::placeholder {
+  color: #9b7b68;
+}
+
+.searchMessage {
+  margin-top: 1rem;
+  color: #666;
+  font-size: 1rem;
+}
