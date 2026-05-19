@@ -1,0 +1,286 @@
+.page {
+  padding-bottom: 7.5rem;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: clamp(2.5rem, 8vw, 5rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border-strong) 36%, white 64%);
+  /* Soft layered washes keep the hero in the same palette as the rest of the app. */
+  background:
+    radial-gradient(
+      circle at 18% 22%,
+      color-mix(in srgb, var(--color-secondary-light) 74%, white 26%) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 82% 24%,
+      color-mix(in srgb, var(--color-primary-light) 32%, white 68%) 0%,
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-surface-alt) 72%, white 28%) 0%,
+      color-mix(in srgb, var(--color-background) 88%, white 12%) 100%
+    );
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  width: min(calc(100% - 1.5rem), var(--max-width));
+  margin: 0 auto;
+}
+
+.featured {
+  width: min(calc(100% - 1.5rem), var(--max-width));
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.title {
+  position: relative;
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 40rem);
+  margin: 1.25rem auto 0;
+  color: color-mix(in srgb, var(--color-text) 88%, var(--color-primary-dark) 12%);
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.heroActions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1.75rem;
+}
+
+.primaryAction,
+.secondaryAction,
+.allLink {
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.35rem;
+  padding: 0.95rem 1.4rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.primaryAction {
+  background: var(--color-primary);
+  color: var(--color-surface);
+  box-shadow: var(--shadow-button);
+}
+
+.secondaryAction {
+  border: 1px solid var(--color-border-strong);
+  background: color-mix(in srgb, var(--color-surface) 86%, var(--color-background) 14%);
+  color: var(--color-primary-dark);
+}
+
+.heroContent {
+  width: 100%;
+  padding: clamp(2.5rem, 8vw, 5rem) clamp(1.25rem, 5vw, 4.5rem);
+  text-align: center;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto auto -3.5rem -1.5rem;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-secondary-light) 82%, white 18%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.featuredHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.featuredTitle {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.8rem, 4vw, 2.35rem);
+}
+
+.featuredIntro {
+  margin: 0.45rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.allLink {
+  align-self: flex-start;
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.stateGrid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.skeletonCard,
+.messageCard {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.skeletonCard {
+  overflow: hidden;
+}
+
+.skeletonImage {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-secondary-light) 58%, white 42%) 0%,
+    color-mix(in srgb, var(--color-background) 65%, white 35%) 50%,
+    color-mix(in srgb, var(--color-secondary-light) 58%, white 42%) 100%
+  );
+}
+
+.skeletonBody {
+  padding: 1.25rem;
+}
+
+.skeletonTitle,
+.skeletonText,
+.skeletonTextShort {
+  height: 0.9rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-primary-light) 22%, white 78%);
+}
+
+.skeletonTitle {
+  width: 68%;
+}
+
+.skeletonText {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.skeletonTextShort {
+  width: 76%;
+  margin-top: 0.75rem;
+}
+
+.messageCard {
+  padding: 1.5rem;
+}
+
+.messageCard h3 {
+  margin: 0;
+  color: var(--color-primary-dark);
+}
+
+.messageCard p {
+  margin: 0.65rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.primaryAction:hover,
+.primaryAction:focus-visible,
+.secondaryAction:hover,
+.secondaryAction:focus-visible,
+.allLink:hover,
+.allLink:focus-visible {
+  transform: translateY(-1px);
+}
+
+.primaryAction:hover,
+.primaryAction:focus-visible {
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-soft);
+}
+
+.secondaryAction:hover,
+.secondaryAction:focus-visible {
+  border-color: var(--color-primary-light);
+  background: color-mix(in srgb, var(--color-primary-light) 8%, white 92%);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible,
+.allLink:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+@media (min-width: 700px) {
+  .page {
+    padding-bottom: 8.5rem;
+  }
+
+  .heroActions {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    min-width: 13rem;
+  }
+
+  .featuredHeader {
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+  }
+
+  .allLink {
+    align-self: end;
+  }
+
+  .stateGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    margin-bottom: 4.5rem;
+  }
+
+  .heroContent {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
