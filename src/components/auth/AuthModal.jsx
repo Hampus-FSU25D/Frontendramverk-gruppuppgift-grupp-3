@@ -1,101 +1,6 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useId, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-
-const Overlay = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-  background: rgb(18 18 24 / 60%);
-`;
-
-const ModalCard = styled.div`
-  position: relative;
-  width: min(100%, 28rem);
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-soft);
-
-  @media (max-width: 640px) {
-    padding: 1.5rem;
-  }
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  border: 0;
-  background: transparent;
-  color: var(--color-text-muted);
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-`;
-
-const Title = styled.h2`
-  margin: 0 0 1.5rem;
-  font-size: 1.5rem;
-`;
-
-const Form = styled.form`
-  display: grid;
-  gap: 0.9rem;
-`;
-
-const Label = styled.label`
-  font-weight: 600;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 0.85rem 1rem;
-  background: var(--color-surface-alt);
-
-  &:focus {
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
-  }
-`;
-
-const Message = styled.p`
-  margin: 0;
-  border-radius: var(--radius-sm);
-  padding: 0.85rem 1rem;
-  font-size: 0.95rem;
-  background: ${({ $variant }) =>
-    $variant === "error" ? "var(--color-error-bg)" : "var(--color-info-bg)"};
-  color: ${({ $variant }) =>
-    $variant === "error" ? "var(--color-error)" : "var(--color-text)"};
-`;
-
-const SubmitButton = styled.button`
-  border: 0;
-  border-radius: var(--radius-pill);
-  padding: 0.85rem 1rem;
-  cursor: ${({ disabled }) => (disabled ? "wait" : "pointer")};
-  background: var(--color-primary);
-  color: #fff;
-  box-shadow: var(--shadow-button);
-  opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
-`;
-
-const SwitchButton = styled.button`
-  width: 100%;
-  margin-top: 1rem;
-  border: 0;
-  border-radius: var(--radius-pill);
-  padding: 0.85rem 1rem;
-  background: var(--color-secondary-light);
-  color: var(--color-text);
-  cursor: pointer;
-`;
+import styles from "./AuthModal.module.css";
 
 const initialFormValues = {
   displayName: "",
@@ -109,6 +14,8 @@ export default function AuthModal({ isOpen, onClose }) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [validationError, setValidationError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const titleId = useId();
+  const messageId = useId();
 
   useEffect(() => {
     if (!isOpen) {
@@ -207,79 +114,110 @@ export default function AuthModal({ isOpen, onClose }) {
     mode === "login"
       ? "Har du inget konto? Registrera dig"
       : "Har du redan ett konto? Logga in";
+  const message = validationError || authError;
+  const hasError = Boolean(message);
 
   return (
-    <Overlay onClick={onClose} role="presentation">
-      <ModalCard
+    <div className={styles.overlay} onClick={onClose} role="presentation">
+      <div
+        className={styles.modal}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="auth-modal-title"
+        aria-labelledby={titleId}
+        aria-describedby={hasError ? messageId : undefined}
         onClick={(event) => event.stopPropagation()}
       >
-        <CloseButton
+        <button
           type="button"
+          className={styles.closeButton}
           onClick={onClose}
           aria-label="Stäng modal"
         >
-          x
-        </CloseButton>
+          ×
+        </button>
 
-        <Title id="auth-modal-title">{title}</Title>
+        <div className={styles.header}>
+          <h2 id={titleId} className={styles.title}>
+            {title}
+          </h2>
+        </div>
 
-        <Form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           {mode === "register" ? (
-            <>
-              <Label htmlFor="auth-display-name">Namn</Label>
-              <Input
+            <div className={styles.field}>
+              <label className={styles.label} htmlFor="auth-display-name">
+                Namn
+              </label>
+              <input
                 id="auth-display-name"
+                className={styles.input}
                 type="text"
                 name="displayName"
                 value={formValues.displayName}
                 onChange={handleChange}
                 autoComplete="nickname"
+                aria-invalid={hasError && !formValues.displayName.trim()}
               />
-            </>
+            </div>
           ) : null}
 
-          <Label htmlFor="auth-email">E-post</Label>
-          <Input
-            id="auth-email"
-            type="email"
-            name="email"
-            value={formValues.email}
-            onChange={handleChange}
-            autoComplete="email"
-          />
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="auth-email">
+              E-post
+            </label>
+            <input
+              id="auth-email"
+              className={styles.input}
+              type="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+              autoComplete="email"
+              aria-invalid={hasError && !formValues.email.trim()}
+            />
+          </div>
 
-          <Label htmlFor="auth-password">Lösenord</Label>
-          <Input
-            id="auth-password"
-            type="password"
-            name="password"
-            value={formValues.password}
-            onChange={handleChange}
-            autoComplete={
-              mode === "login" ? "current-password" : "new-password"
-            }
-          />
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="auth-password">
+              Lösenord
+            </label>
+            <input
+              id="auth-password"
+              className={styles.input}
+              type="password"
+              name="password"
+              value={formValues.password}
+              onChange={handleChange}
+              autoComplete={
+                mode === "login" ? "current-password" : "new-password"
+              }
+              aria-invalid={hasError && !formValues.password.trim()}
+            />
+          </div>
 
-          {validationError ? (
-            <Message $variant="error">{validationError}</Message>
+          {message ? (
+            <p id={messageId} className={styles.error} role="alert">
+              {message}
+            </p>
           ) : null}
 
-          {!validationError && authError ? (
-            <Message $variant="error">{authError}</Message>
-          ) : null}
-
-          <SubmitButton type="submit" disabled={isSubmitting}>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isSubmitting}
+          >
             {submitLabel}
-          </SubmitButton>
-        </Form>
+          </button>
+        </form>
 
-        <SwitchButton type="button" onClick={handleModeToggle}>
+        <button
+          type="button"
+          className={styles.switchModeButton}
+          onClick={handleModeToggle}
+        >
           {switchLabel}
-        </SwitchButton>
-      </ModalCard>
-    </Overlay>
+        </button>
+      </div>
+    </div>
   );
 }
