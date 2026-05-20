@@ -1,63 +1,82 @@
-import { useState } from 'react';
-import styles from '../../styles/AddRecipeForm.module.css';
+import { useState } from "react";
+import styles from "../../styles/AddRecipeForm.module.css";
 
 const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
   const [formData, setFormData] = useState({
-    title: initialData?.title || '',
-    description: initialData?.description || '',
-    ingredients: initialData?.ingredients || [''],
-    instructions: initialData?.instructions || '',
+    title: initialData?.title || "",
+    description: initialData?.description || "",
+    ingredients: initialData?.ingredients || [""],
+    instructions: initialData?.instructions || [""], // Changed to array
     tags: initialData?.tags || [],
-    imageUrl: initialData?.imageUrl || '',
+    imageUrl: initialData?.imageUrl || "",
   });
 
-  const [tagInput, setTagInput] = useState('');
+  const [tagInput, setTagInput] = useState("");
 
   // Handle text inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // Handle ingredients array
   const handleIngredientChange = (index, value) => {
     const newIngredients = [...formData.ingredients];
     newIngredients[index] = value;
-    setFormData(prev => ({ ...prev, ingredients: newIngredients }));
+    setFormData((prev) => ({ ...prev, ingredients: newIngredients }));
   };
 
   const addIngredient = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      ingredients: [...prev.ingredients, '']
+      ingredients: [...prev.ingredients, ""],
     }));
   };
 
   const removeIngredient = (index) => {
     const newIngredients = formData.ingredients.filter((_, i) => i !== index);
-    setFormData(prev => ({ ...prev, ingredients: newIngredients }));
+    setFormData((prev) => ({ ...prev, ingredients: newIngredients }));
+  };
+
+  // Handle instructions array (SAME PATTERN AS INGREDIENTS)
+  const handleInstructionChange = (index, value) => {
+    const newInstructions = [...formData.instructions];
+    newInstructions[index] = value;
+    setFormData((prev) => ({ ...prev, instructions: newInstructions }));
+  };
+
+  const addInstruction = () => {
+    setFormData((prev) => ({
+      ...prev,
+      instructions: [...prev.instructions, ""],
+    }));
+  };
+
+  const removeInstruction = (index) => {
+    const newInstructions = formData.instructions.filter((_, i) => i !== index);
+    setFormData((prev) => ({ ...prev, instructions: newInstructions }));
   };
 
   // Handle tags
   const addTag = () => {
     if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        tags: [...prev.tags, tagInput.trim()]
+        tags: [...prev.tags, tagInput.trim()],
       }));
-      setTagInput('');
+      setTagInput("");
     }
   };
 
   const removeTag = (tagToRemove) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       addTag();
     }
@@ -65,7 +84,11 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit?.(formData);
+    // Filter out empty instructions before submitting
+    const filteredInstructions = formData.instructions.filter(
+      (step) => step.trim() !== "",
+    );
+    onSubmit?.({ ...formData, instructions: filteredInstructions });
   };
 
   return (
@@ -74,7 +97,9 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
 
       {/* Title */}
       <div className={styles.formGroup}>
-        <label htmlFor="title" className={styles.label}>Receptets namn *</label>
+        <label htmlFor="title" className={styles.label}>
+          Receptets namn *
+        </label>
         <input
           type="text"
           id="title"
@@ -90,7 +115,9 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
 
       {/* Description */}
       <div className={styles.formGroup}>
-        <label htmlFor="description" className={styles.label}>Beskrivning</label>
+        <label htmlFor="description" className={styles.label}>
+          Beskrivning
+        </label>
         <textarea
           id="description"
           name="description"
@@ -107,14 +134,14 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
       <div className={styles.formGroup}>
         <label className={styles.label}>Ingredienser *</label>
         {formData.ingredients.map((ingredient, index) => (
-          <div key={index} className={styles.ingredientRow}>
+          <div key={index} className={styles.dynamicRow}>
             <input
               type="text"
               value={ingredient}
               onChange={(e) => handleIngredientChange(index, e.target.value)}
               required
               disabled={isSaving}
-              className={styles.ingredientInput}
+              className={styles.dynamicInput}
               placeholder={`Ingrediens ${index + 1}`}
             />
             {formData.ingredients.length > 1 && (
@@ -140,20 +167,41 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
         </button>
       </div>
 
-      {/* Instructions */}
+      {/* Instructions - NOW DYNAMIC like ingredients */}
       <div className={styles.formGroup}>
-        <label htmlFor="instructions" className={styles.label}>Instruktioner *</label>
-        <textarea
-          id="instructions"
-          name="instructions"
-          value={formData.instructions}
-          onChange={handleChange}
-          rows={6}
-          required
+        <label className={styles.label}>Instruktioner *</label>
+        {formData.instructions.map((instruction, index) => (
+          <div key={index} className={styles.dynamicRow}>
+            <textarea
+              value={instruction}
+              onChange={(e) => handleInstructionChange(index, e.target.value)}
+              required
+              disabled={isSaving}
+              className={styles.dynamicTextarea}
+              placeholder={`Steg ${index + 1}`}
+              rows={2}
+            />
+            {formData.instructions.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removeInstruction(index)}
+                disabled={isSaving}
+                className={styles.removeBtn}
+                aria-label="Ta bort steg"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={addInstruction}
           disabled={isSaving}
-          className={styles.textarea}
-          placeholder="Steg för steg hur man lagar receptet...&#10;1. Gör så här&#10;2. Gör så här&#10;3. Gör så här"
-        />
+          className={styles.addBtn}
+        >
+          + Lägg till steg
+        </button>
       </div>
 
       {/* Tags */}
@@ -197,7 +245,9 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
 
       {/* Image URL */}
       <div className={styles.formGroup}>
-        <label htmlFor="imageUrl" className={styles.label}>Bild-URL (valfritt)</label>
+        <label htmlFor="imageUrl" className={styles.label}>
+          Bild-URL (valfritt)
+        </label>
         <input
           type="url"
           id="imageUrl"
@@ -211,11 +261,7 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
       </div>
 
       {/* Submit */}
-      <button 
-        type="submit" 
-        disabled={isSaving}
-        className={styles.submitBtn}
-      >
+      <button type="submit" disabled={isSaving} className={styles.submitBtn}>
         {isSaving ? "Sparar..." : "📖 Publicera recept"}
       </button>
     </form>

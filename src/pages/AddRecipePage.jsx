@@ -78,10 +78,9 @@ const AddRecipePage = () => {
         await supabase.from("ingredients").insert(validIngredients);
       }
 
-      // Save instructions
+      //instructions is already an array
       const steps = recipeData.instructions
-        .split("\n")
-        .filter((step) => step && step.trim())
+        .filter((step) => step && step.trim() !== "")
         .map((step, idx) => ({
           recipe_id: recipe.id,
           step_number: idx + 1,
