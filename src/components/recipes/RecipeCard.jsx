@@ -6,7 +6,7 @@ export default function RecipeCard({ recipe }) {
     <article className={styles.recipeCard}>
       <img
         className={styles.recipeImage}
-        src={recipe.image}
+        src={recipe.image_url}
         alt={recipe.title}
       />
 

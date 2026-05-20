@@ -43,3 +43,28 @@
   color: #666;
   font-size: 1rem;
 }
+
+.stateMessage {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #fff8f2;
+  border: 1px solid #f0d8c8;
+  border-radius: 16px;
+  color: #4b2e2e;
+}
+
+.loading {
+  font-size: 1.1rem;
+}
+
+.error {
+  border-color: #d88c8c;
+  background-color: #fff2f2;
+  color: #7a2e2e;
+}
+
+.empty {
+  color: #666;
+}

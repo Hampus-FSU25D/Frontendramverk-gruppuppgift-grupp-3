@@ -27,15 +27,17 @@ export default function RecipesPage() {
     fetchRecipes();
   }, []);
   
-  if (loading) {
-    return <p>Laddar recept...</p>;
-  }
-  if (error) {
-    return <p>{error}</p>;
-  }
-  if (recipes.length === 0) {
-    return <p>Inga recept hittades.</p>;
-  }
+    if (loading) {
+      return <p className={`${styles.stateMessage} ${styles.loading}`}>Laddar recept...</p>;
+    }
+
+    if (error) {
+      return <p className={`${styles.stateMessage} ${styles.error}`}>{error}</p>;
+    }
+
+    if (recipes.length === 0) {
+      return <p className={`${styles.stateMessage} ${styles.empty}`}>Inga recept hittades.</p>;
+    }
   
   const filteredRecipes = recipes.filter((recipe) =>
   recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
