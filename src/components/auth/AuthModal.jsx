@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useReducer, useRef } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import styles from "./AuthModal.module.css";
 
@@ -8,21 +8,66 @@ const initialFormValues = {
   password: "",
 };
 
+const initialState = {
+  mode: "login",
+  formValues: initialFormValues,
+  validationError: "",
+  isSubmitting: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "reset":
+      return initialState;
+    case "change_field":
+      return {
+        ...state,
+        formValues: {
+          ...state.formValues,
+          [action.name]: action.value,
+        },
+      };
+    case "toggle_mode":
+      return {
+        ...state,
+        mode: state.mode === "login" ? "register" : "login",
+        validationError: "",
+      };
+    case "set_validation_error":
+      return {
+        ...state,
+        validationError: action.message,
+        isSubmitting: false,
+      };
+    case "start_submitting":
+      return {
+        ...state,
+        validationError: "",
+        isSubmitting: true,
+      };
+    case "stop_submitting":
+      return {
+        ...state,
+        isSubmitting: false,
+      };
+    default:
+      return state;
+  }
+}
+
 export default function AuthModal({ isOpen, onClose }) {
   const { authError, signIn, signUp, user } = useAuth();
-  const [mode, setMode] = useState("login");
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [validationError, setValidationError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const titleId = useId();
   const messageId = useId();
+  const displayNameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
+
+  const { mode, formValues, validationError, isSubmitting } = state;
 
   useEffect(() => {
     if (!isOpen) {
-      setMode("login");
-      setFormValues(initialFormValues);
-      setValidationError("");
-      setIsSubmitting(false);
+      dispatch({ type: "reset" });
     }
   }, [isOpen]);
 
@@ -32,6 +77,17 @@ export default function AuthModal({ isOpen, onClose }) {
     }
   }, [isOpen, onClose, user]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const focusTarget =
+      mode === "register" ? displayNameInputRef.current : emailInputRef.current;
+
+    focusTarget?.focus();
+  }, [isOpen, mode]);
+
   if (!isOpen) {
     return null;
   }
@@ -39,17 +95,11 @@ export default function AuthModal({ isOpen, onClose }) {
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setFormValues((currentValues) => ({
-      ...currentValues,
-      [name]: value,
-    }));
+    dispatch({ type: "change_field", name, value });
   }
 
   function handleModeToggle() {
-    setMode((currentMode) =>
-      currentMode === "login" ? "register" : "login"
-    );
-    setValidationError("");
+    dispatch({ type: "toggle_mode" });
   }
 
   function validateForm() {
@@ -82,12 +132,11 @@ export default function AuthModal({ isOpen, onClose }) {
     const errorMessage = validateForm();
 
     if (errorMessage) {
-      setValidationError(errorMessage);
+      dispatch({ type: "set_validation_error", message: errorMessage });
       return;
     }
 
-    setValidationError("");
-    setIsSubmitting(true);
+    dispatch({ type: "start_submitting" });
 
     const displayName = formValues.displayName.trim();
     const email = formValues.email.trim();
@@ -97,7 +146,7 @@ export default function AuthModal({ isOpen, onClose }) {
         ? await signIn(email, password)
         : await signUp(email, password, displayName);
 
-    setIsSubmitting(false);
+    dispatch({ type: "stop_submitting" });
 
     if (result.success && mode === "login") {
       onClose();
@@ -150,6 +199,7 @@ export default function AuthModal({ isOpen, onClose }) {
               </label>
               <input
                 id="auth-display-name"
+                ref={displayNameInputRef}
                 className={styles.input}
                 type="text"
                 name="displayName"
@@ -167,6 +217,7 @@ export default function AuthModal({ isOpen, onClose }) {
             </label>
             <input
               id="auth-email"
+              ref={emailInputRef}
               className={styles.input}
               type="email"
               name="email"
