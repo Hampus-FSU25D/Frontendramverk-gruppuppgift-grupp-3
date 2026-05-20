@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import { supabase } from "../lib/supabaseClient";
 
 function shuffleRecipes(recipes) {
@@ -26,17 +26,43 @@ function normalizeRecipe(recipe) {
   };
 }
 
+const initialState = {
+  recipes: [],
+  loading: true,
+  error: "",
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "fetch_start":
+      return {
+        ...state,
+        loading: true,
+        error: "",
+      };
+    case "fetch_success":
+      return {
+        recipes: action.recipes,
+        loading: false,
+        error: "",
+      };
+    case "fetch_error":
+      return {
+        recipes: [],
+        loading: false,
+        error: action.message,
+      };
+    default:
+      return state;
+  }
+}
+
 export function useRandomRecipes(limit = 3) {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    let ignore = false;
-
-    async function fetchRandomRecipes() {
-      setLoading(true);
-      setError("");
+  const fetchRandomRecipes = useCallback(
+    async (ignoreRef) => {
+      dispatch({ type: "fetch_start" });
 
       const fetchSize = Math.max(limit * 4, 12);
       const { data, error: fetchError } = await supabase
@@ -46,14 +72,12 @@ export function useRandomRecipes(limit = 3) {
         .limit(fetchSize);
 
       // Guards against setting state if the component unmounts mid-request.
-      if (ignore) {
+      if (ignoreRef?.current) {
         return;
       }
 
       if (fetchError) {
-        setRecipes([]);
-        setError(fetchError.message);
-        setLoading(false);
+        dispatch({ type: "fetch_error", message: fetchError.message });
         return;
       }
 
@@ -61,20 +85,29 @@ export function useRandomRecipes(limit = 3) {
       // Pull a slightly larger slice, then randomize down to the requested count.
       const selectedRecipes = shuffleRecipes(normalizedRecipes).slice(0, limit);
 
-      setRecipes(selectedRecipes);
-      setLoading(false);
-    }
+      dispatch({ type: "fetch_success", recipes: selectedRecipes });
+    },
+    [limit]
+  );
 
-    fetchRandomRecipes();
+  useEffect(() => {
+    const ignoreRef = { current: false };
+
+    fetchRandomRecipes(ignoreRef);
 
     return () => {
-      ignore = true;
+      ignoreRef.current = true;
     };
-  }, [limit]);
+  }, [fetchRandomRecipes]);
+
+  const refresh = useCallback(() => {
+    fetchRandomRecipes();
+  }, [fetchRandomRecipes]);
 
   return {
-    recipes,
-    loading,
-    error,
+    recipes: state.recipes,
+    loading: state.loading,
+    error: state.error,
+    refresh,
   };
 }

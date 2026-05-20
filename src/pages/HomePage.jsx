@@ -14,6 +14,7 @@ export default function HomePage() {
     recipes: featuredRecipes,
     loading,
     error,
+    refresh,
   } = useRandomRecipes(3);
 
   return (
@@ -70,6 +71,13 @@ export default function HomePage() {
           <div className={styles.messageCard} role="alert">
             <h3>Kunde inte hämta recept</h3>
             <p>{error}</p>
+            <button
+              type="button"
+              className={styles.retryButton}
+              onClick={refresh}
+            >
+              Försök igen
+            </button>
           </div>
         ) : featuredRecipes.length === 0 ? (
           <div className={styles.messageCard}>
@@ -78,6 +86,13 @@ export default function HomePage() {
               Lägg till det första dessertreceptet så visas det här bland
               utvalda godbitar.
             </p>
+            <button
+              type="button"
+              className={styles.retryButton}
+              onClick={refresh}
+            >
+              Uppdatera listan
+            </button>
           </div>
         ) : (
           <RecipeList recipes={featuredRecipes} />

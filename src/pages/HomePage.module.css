@@ -215,11 +215,34 @@
   line-height: 1.6;
 }
 
+.retryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  margin-top: 1rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  padding: 0.8rem 1.2rem;
+  background: color-mix(in srgb, var(--color-surface) 86%, var(--color-background) 14%);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
 .primaryAction:hover,
 .primaryAction:focus-visible,
 .secondaryAction:hover,
 .secondaryAction:focus-visible,
 .allLink:hover,
+.retryButton:hover,
+.retryButton:focus-visible,
 .allLink:focus-visible {
   transform: translateY(-1px);
 }
@@ -238,9 +261,16 @@
 
 .primaryAction:focus-visible,
 .secondaryAction:focus-visible,
+.retryButton:focus-visible,
 .allLink:focus-visible {
   outline: 3px solid var(--color-secondary);
   outline-offset: 3px;
+}
+
+.retryButton:hover,
+.retryButton:focus-visible {
+  border-color: var(--color-primary-light);
+  background: color-mix(in srgb, var(--color-primary-light) 8%, white 92%);
 }
 
 @media (min-width: 700px) {
