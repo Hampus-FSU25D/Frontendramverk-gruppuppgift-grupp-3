@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { favoritesService } from "../services/favoritesService";
-import { useAuth } from "../context/AuthContext";
-
+import { AuthContext } from "../context/AuthContext";
 
 export const useFavorite = (recipeId) => {
-    const userId
+
+    const { user } = useContext(AuthContext);
+    const userId = user?.id;
 
     const [isFavorited, setIsFavorited] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +23,7 @@ export const useFavorite = (recipeId) => {
                 console.error("Couldn't check initial favorite status", error)
             }
         };
-        checkInitialFavoriteStatus();
+        checkFavoriteStatus();
     }, [userId, recipeId]);
 
 
@@ -38,20 +39,20 @@ export const useFavorite = (recipeId) => {
 
             setIsFavorited(!isFavorited)
             setShowMessage(true);
-            setTimeout(() => setShowMessage(false), 4000);
+            setTimeout(() => setShowMessage(false), 2000);
 
         } catch (error) {
             console.error("Couldn't update favorite status", error)
         } finally {
             setIsLoading(false);
-        };
-
-        return {
-            isFavorited,
-            isLoading,
-            showMessage,
-            toggleGavorites
         }
+    };
+
+    return {
+        isFavorited,
+        isLoading,
+        showMessage,
+        toggleFavorites
     };
 };
 
