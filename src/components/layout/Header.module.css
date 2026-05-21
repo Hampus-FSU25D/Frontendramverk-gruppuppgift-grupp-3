@@ -1,0 +1,131 @@
+.header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-navigation-bg);
+}
+
+.inner {
+  width: min(calc(100% - 1.25rem), var(--max-width));
+  margin: 0 auto;
+  min-height: 4.25rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+}
+
+.brandWrap {
+  min-width: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.brandLink {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  color: var(--color-primary-dark);
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.brand {
+  display: block;
+  max-width: min(52vw, 16ch);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.authSide {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.authButton {
+  min-width: 6.75rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+  box-shadow: var(--shadow-button);
+}
+
+.authButton:disabled {
+  opacity: 0.72;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.brandLink:hover,
+.brandLink:focus-visible {
+  color: var(--color-primary);
+}
+
+.authButton:hover:not(:disabled),
+.authButton:focus-visible {
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-1px);
+}
+
+.brandLink:focus-visible,
+.authButton:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+@media (min-width: 700px) {
+  .inner {
+    width: min(calc(100% - 2rem), var(--max-width));
+    min-height: 4rem;
+    gap: 1rem;
+    padding: 0.65rem 0;
+  }
+
+  .brand {
+    max-width: 18ch;
+    font-size: 1.4rem;
+  }
+
+  .authButton {
+    min-height: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .inner {
+    width: min(calc(100% - 0.85rem), var(--max-width));
+    gap: 0.45rem;
+  }
+
+  .brand {
+    max-width: 11ch;
+    font-size: 1rem;
+  }
+
+  .authButton {
+    min-width: 5.9rem;
+    padding-inline: 0.75rem;
+    font-size: 0.95rem;
+  }
+}

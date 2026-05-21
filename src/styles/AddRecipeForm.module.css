@@ -1,0 +1,210 @@
+.form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  color: #ca6180;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.input,
+.textarea,
+.tagInput {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #9ed3dc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.input:focus,
+.textarea:focus,
+.tagInput:focus {
+  outline: none;
+  border-color: #ca6180;
+  box-shadow: 0 0 0 3px rgba(202, 97, 128, 0.1);
+}
+
+.input:disabled,
+.textarea:disabled,
+.tagInput:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+/* Dynamic rows for ingredients and instructions */
+.dynamicRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dynamicInput {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #9ed3dc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.dynamicTextarea {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #9ed3dc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.dynamicInput:focus,
+.dynamicTextarea:focus {
+  outline: none;
+  border-color: #ca6180;
+  box-shadow: 0 0 0 3px rgba(202, 97, 128, 0.1);
+}
+
+.dynamicInput:disabled,
+.dynamicTextarea:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.removeBtn {
+  background-color: #fcb7c7;
+  border: none;
+  border-radius: 6px;
+  padding: 0 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.removeBtn:hover:not(:disabled) {
+  background-color: #ca6180;
+  color: white;
+}
+
+.removeBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.addBtn,
+.addTagBtn {
+  background-color: #9ed3dc;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.addBtn:hover:not(:disabled),
+.addTagBtn:hover:not(:disabled) {
+  background-color: #ca6180;
+  color: white;
+}
+
+.addBtn:disabled,
+.addTagBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tagInputWrapper {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagInput {
+  flex: 1;
+}
+
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background-color: #fefd99;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.removeTagBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 0.75rem;
+  padding: 0;
+  font-weight: bold;
+}
+
+.removeTagBtn:hover:not(:disabled) {
+  color: #ca6180;
+}
+
+.removeTagBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submitBtn {
+  width: 100%;
+  background-color: #ca6180;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: #9ed3dc;
+  color: #333;
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

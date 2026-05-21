@@ -9,6 +9,7 @@ export default function AppRoutes() {
       <Route element={<Layout />}>
         {routes.map((route) => {
           const PageComponent = route.element;
+
           const pageElement = route.requiresAuth ? (
             <ProtectedRoute>
               <PageComponent />
@@ -17,7 +18,13 @@ export default function AppRoutes() {
             <PageComponent />
           );
 
-          return <Route key={route.path} path={route.path} element={pageElement} />;
+          return (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={pageElement}
+            />
+          );
         })}
       </Route>
     </Routes>

@@ -1,0 +1,33 @@
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.tag {
+  background-color: #fefd99;
+  color: #333;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background-color: #fcb7c7;
+  transform: scale(1.05);
+}
+
+/* Optional: Different colors for different tag types */
+.tag[data-type="area"] {
+  background-color: #9ed3dc;
+}
+
+.tag[data-type="dietary"] {
+  background-color: #fcb7c7;
+  color: #333;
+}

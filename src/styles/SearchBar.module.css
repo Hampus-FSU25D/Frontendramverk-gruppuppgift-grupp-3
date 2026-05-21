@@ -1,0 +1,98 @@
+.searchBarContainer {
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.searchInputWrapper {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 2px solid #9ED3DC;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #CA6180;
+  box-shadow: 0 0 0 3px rgba(202, 97, 128, 0.1);
+}
+
+.filterToggleBtn {
+  background-color: #9ED3DC;
+  border: none;
+  border-radius: 8px;
+  padding: 0 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.2s ease;
+}
+
+.filterToggleBtn:hover {
+  background-color: #CA6180;
+  color: white;
+}
+
+.clearBtn {
+  position: absolute;
+  right: 4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 1rem;
+}
+
+.clearBtn:hover {
+  color: #CA6180;
+}
+
+.filtersPanel {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #9ED3DC;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filterLabel {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #333;
+}
+
+.tagSelect {
+  padding: 0.5rem;
+  border: 1px solid #FCB7C7;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.tagSelect:focus {
+  outline: none;
+  border-color: #CA6180;
+}
+
+@media (min-width: 768px) {
+  .filterGroup {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}

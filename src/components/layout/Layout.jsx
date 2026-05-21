@@ -1,18 +1,31 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import LoginPrompt from "../auth/LoginPrompt";
+import AuthModal from "../auth/AuthModal";
+import { useAuth } from "../../hooks/useAuth";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navbar from "./Navbar";
 
 export default function Layout({ children }) {
+  const { user, signOut, authLoading } = useAuth();
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const content = children ?? <Outlet />;
 
   return (
-    <div>
-      <Header />
+    <>
+      <Header
+        isLoggedIn={Boolean(user)}
+        isAuthBusy={authLoading}
+        onLogin={() => setIsLoginOpen(true)}
+        onLogout={signOut}
+      />
       <main>{content}</main>
       <Navbar />
       <Footer />
-    </div>
+      <AuthModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+      />
+    </>
   );
 }

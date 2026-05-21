@@ -1,0 +1,30 @@
+.favoritesPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #4b2e2e;
+}
+
+.emptyText {
+  color: #666;
+  font-size: 1rem;
+}
+
+.emptyState {
+  background-color: #fff8f2;
+  border: 1px solid #f0d8c8;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.emptyState h2 {
+  margin-bottom: 1rem;
+  color: #4b2e2e;
+}
+

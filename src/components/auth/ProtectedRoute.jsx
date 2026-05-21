@@ -1,19 +1,16 @@
-import { useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function ProtectedRoute({ children }) {
-  const { isAuthenticated, openLoginPrompt } = useAuth();
+  const { isAuthenticated, authLoading } = useAuth();
   const location = useLocation();
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      openLoginPrompt();
-    }
-  }, [isAuthenticated, openLoginPrompt]);
+  if (authLoading) {
+    return <p>Kontrollerar inloggning...</p>;
+  }
 
   if (!isAuthenticated) {
-    return <Navigate to="/" replace state={{ from: location, loginRequired: true }} />;
+    return <Navigate to="/" state={{ from: location.pathname }} replace />;
   }
 
   return children;

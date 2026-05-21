@@ -1,4 +1,5 @@
 import AddRecipePage from "../pages/AddRecipePage";
+import EditRecipePage from "../pages/EditRecipePage";
 import FavoritesPage from "../pages/FavoritesPage";
 import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -10,33 +11,50 @@ const routes = [
     path: "/",
     element: HomePage,
     label: "Start",
+    showInNav: true,
+    requiresAuth: false,
   },
   {
     path: "/recept",
     element: RecipesPage,
     label: "Recept",
+    showInNav: true,
+    requiresAuth: false,
   },
   {
     path: "/recept/:id",
     element: RecipeDetailsPage,
     label: "Receptdetaljer",
+    showInNav: false,
+    requiresAuth: false,
+  },
+  {
+    path: "/recept/:id/redigera",
+    element: EditRecipePage,
+    label: "Redigera recept",
+    showInNav: false,
+    requiresAuth: true,
   },
   {
     path: "/favoriter",
     element: FavoritesPage,
     label: "Favoriter",
+    showInNav: true,
     requiresAuth: true,
   },
   {
     path: "/lagg-till",
     element: AddRecipePage,
-    label: "Lagg till recept",
+    label: "Lägg till recept",
+    showInNav: true,
     requiresAuth: true,
   },
   {
     path: "*",
     element: NotFoundPage,
     label: "Inte hittad",
+    showInNav: false,
+    requiresAuth: false,
   },
 ];
 
