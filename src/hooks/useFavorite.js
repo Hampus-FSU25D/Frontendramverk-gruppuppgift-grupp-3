@@ -6,25 +6,25 @@ const [isLoading, setIsLoading] = useState(false);
 const [showMessage, setShowMessage] = useState(false);
 
 const toggleFavorites = async () => {
-    if(!userId) return;
+    if (!userId) return;
 
     try {
-    setIsLoading(true);
+        setIsLoading(true);
 
-    await (isFavorited 
-    ? favoritesService.removeFavorite(userId, recipeId) 
-    : favoritesService.addFavorite(userId, recipeId));
-    
-    setIsFavorited(!isFavorited)
+        await (isFavorited
+            ? favoritesService.removeFavorite(userId, recipeId)
+            : favoritesService.addFavorite(userId, recipeId));
 
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 4000);
-    
+        setIsFavorited(!isFavorited)
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 4000);
+
     } catch (error) {
         console.error("Couldn't update favorite status", error)
     } finally {
-    setIsLoading(false);
-    }}
+        setIsLoading(false);
+    }
+}
 
 
 
