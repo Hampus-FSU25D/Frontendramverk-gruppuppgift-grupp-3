@@ -22,7 +22,7 @@ function normalizeRecipe(recipe) {
     id: recipe.id,
     title: recipe.title,
     description: recipe.description ?? "",
-    image: recipe.image_url ?? undefined,
+    image_url: recipe.image_url ?? "",
   };
 }
 
