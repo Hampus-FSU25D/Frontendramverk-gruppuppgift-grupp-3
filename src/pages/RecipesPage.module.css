@@ -15,3 +15,56 @@
   margin-bottom: 2rem;
   font-size: 1rem;
 }
+
+.searchInput {
+  width: 100%;
+  max-width: 420px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e0c7b5;
+  border-radius: 999px;
+  font-size: 1rem;
+  background-color: #fffaf6;
+  color: #4b2e2e;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #8b4a2f;
+  box-shadow: 0 0 0 3px rgba(139, 74, 47, 0.15);
+}
+
+.searchInput::placeholder {
+  color: #9b7b68;
+}
+
+.searchMessage {
+  margin-top: 1rem;
+  color: #666;
+  font-size: 1rem;
+}
+
+.stateMessage {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #fff8f2;
+  border: 1px solid #f0d8c8;
+  border-radius: 16px;
+  color: #4b2e2e;
+}
+
+.loading {
+  font-size: 1.1rem;
+}
+
+.error {
+  border-color: #d88c8c;
+  background-color: #fff2f2;
+  color: #7a2e2e;
+}
+
+.empty {
+  color: #666;
+}

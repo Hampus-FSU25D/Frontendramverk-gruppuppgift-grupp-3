@@ -1,39 +1,65 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 import RecipeList from "../components/recipes/RecipeList";
 import styles from "./RecipesPage.module.css";
 
 export default function RecipesPage() {
   
-  const recipes = [{
-    id: 1,
-    title: "Chokladtårta",
-    description: "Läcker chokladtårta med grädde.",
-    image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587",
-  },
-  {
-    id: 2,
-    title: "Äppelpaj",
-    description: "En klassisk äppelpaj med kanel.",
-    image:
-      "https://plus.unsplash.com/premium_photo-1694336203192-c9e7f2891b95?q=80&w=930&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 3,
-    title: "Pannkakor",
-    description: "Tunna och fluffiga pannkakor.",
-    image:
-      "https://images.unsplash.com/photo-1587314168485-3236d6710814?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-];
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
   
+  useEffect(() => {
+    async function fetchRecipes() {
+      const { data, error } = await supabase
+      .from("recipes")
+      .select(`*, categories (name)`);
+      
+      if(error) {
+        setError("Kunde inte hämta recept");
+        setLoading(false);
+        return;
+      }
+      setRecipes(data);
+      
+      setLoading(false);
+    }
+    fetchRecipes();
+  }, []);
+  
+    if (loading) {
+      return <p className={`${styles.stateMessage} ${styles.loading}`}>Laddar recept...</p>;
+    }
+
+    if (error) {
+      return <p className={`${styles.stateMessage} ${styles.error}`}>{error}</p>;
+    }
+
+    if (recipes.length === 0) {
+      return <p className={`${styles.stateMessage} ${styles.empty}`}>Inga recept hittades.</p>;
+    }
+  
+  const filteredRecipes = recipes.filter((recipe) =>
+  recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
   return (
     <main className={styles.recipesPage}>
       <h1 className={styles.title}>Alla efterrätter</h1>
-
-      <p className={styles.description}>
-        Utforska läckra dessertrecept från vår kokbok.
-      </p>   
-      <RecipeList recipes={recipes} />
+      <p className={styles.description}>Utforska läckra dessertrecept från vår kokbok.</p>   
+      <input className={styles.searchInput}
+        type="text"
+        placeholder="Sök efter dessert..."
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.target.value)}
+      />
+      {filteredRecipes.length === 0 ? (
+        <p className={styles.searchMessage}>Inga recept matchade din sökning.</p>
+      ) : (
+        <RecipeList recipes={filteredRecipes} />
+      )}
     </main>
   );
 }
