@@ -93,8 +93,9 @@ const AddRecipeForm = ({ onSubmit, initialData = null, isSaving = false }) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h2 className={styles.title}>✨ Lägg till nytt recept</h2>
-
+<h2 className={styles.title}>
+  {initialData ? "✏️ Redigera recept" : "✨ Lägg till nytt recept"}
+</h2>
       {/* Title */}
       <div className={styles.formGroup}>
         <label htmlFor="title" className={styles.label}>

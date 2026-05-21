@@ -190,9 +190,9 @@ const EditRecipePage = () => {
           <p>Omdirigerar...</p>
         </div>
       )}
-      <h1 style={{ textAlign: "center", color: "#CA6180" }}>
+      {/* <h1 style={{ textAlign: "center", color: "#CA6180" }}>
         ✏️ Redigera recept
-      </h1>
+      </h1> */}
       <AddRecipeForm
         onSubmit={handleUpdate}
         initialData={recipe}
