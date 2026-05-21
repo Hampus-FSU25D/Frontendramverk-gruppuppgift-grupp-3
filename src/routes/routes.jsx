@@ -1,4 +1,5 @@
 import AddRecipePage from "../pages/AddRecipePage";
+import EditRecipePage from "../pages/EditRecipePage";
 import FavoritesPage from "../pages/FavoritesPage";
 import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -26,6 +27,13 @@ const routes = [
     label: "Receptdetaljer",
     showInNav: false,
     requiresAuth: false,
+  },
+  {
+    path: "/recept/:id/redigera",
+    element: EditRecipePage,
+    label: "Redigera recept",
+    showInNav: false,
+    requiresAuth: true,
   },
   {
     path: "/favoriter",
