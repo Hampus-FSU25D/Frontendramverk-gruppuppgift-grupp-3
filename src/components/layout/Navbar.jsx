@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import homeIcon from '../../assets/home.png' ;
-import cookBook from '../../assets/cookBook.png'
+import cookBook from '../../assets/cookbook.png'
 import add from '../../assets/add.png'
 import favorite from '../../assets/favorite.png'
 
