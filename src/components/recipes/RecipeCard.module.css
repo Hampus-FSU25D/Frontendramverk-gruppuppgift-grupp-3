@@ -13,3 +13,13 @@
   transform: translateY(-4px);
   transition: 0.2s ease;
 }
+.categoryTag {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background-color: #f0d8c8;
+  color: #4b2e2e;
+  font-size: 0.85rem;
+  font-weight: 600;
+}

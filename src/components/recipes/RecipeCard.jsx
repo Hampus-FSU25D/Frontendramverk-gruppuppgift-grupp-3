@@ -11,13 +11,17 @@ export default function RecipeCard({ recipe }) {
       />
 
       <div className={styles.recipeContent}>
+        {recipe.categories?.name && (
+            <span className={styles.categoryTag}>
+                {recipe.categories.name}
+            </span>
+        )}
         <h2>{recipe.title}</h2>
-
         <p>{recipe.description}</p>
 
         <Link 
             className={styles.recipeButton}
-            to={`/recept /${recipe.id}`}>Visa recept</Link>
+            to={`/recept/${recipe.id}`}>Visa recept</Link>
       </div>
     </article>
   );

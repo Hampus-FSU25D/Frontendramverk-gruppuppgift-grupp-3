@@ -13,7 +13,9 @@ export default function RecipesPage() {
   
   useEffect(() => {
     async function fetchRecipes() {
-      const { data, error } = await supabase.from("recipes").select("*");
+      const { data, error } = await supabase
+      .from("recipes")
+      .select(`*, categories (name)`);
       
       if(error) {
         setError("Kunde inte hämta recept");
