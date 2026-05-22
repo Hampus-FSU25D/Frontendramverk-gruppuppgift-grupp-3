@@ -1,4 +1,4 @@
-export const recipesService = {
+export const deleteService = {
   /**
    * Will delete one specific recipe only if the userId and the created_by is matching. **
    * @param {string} recipeId 

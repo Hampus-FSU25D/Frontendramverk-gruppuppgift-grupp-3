@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import FavoriteButton from "../components/recipes/FavoriteButton";
+import DeleteButton from "../components/recipes/DeleteButton";
 import styles from "./RecipeDetailsPage.module.css";
 
 export default function RecipeDetailsPage() {
@@ -67,8 +68,12 @@ export default function RecipeDetailsPage() {
       <header className={styles.recipeHeader}>
         <div className={styles.titleRow}>
           <h1>{recipe.title}</h1>
+
+          <div className={styles.actionButtons}> {/* En wrapper för att lägga knapparna på rad */}
           <FavoriteButton recipeId={recipe.id} />
-        </div>
+          <DeleteButton recipeId={recipe.id} recipeOwnerId={recipe.created_by} />
+  </div>
+</div>
         
         {recipe.categories?.name && (
           <span className={styles.categoryTag}>{recipe.categories.name}</span>
