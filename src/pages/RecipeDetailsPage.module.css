@@ -1,0 +1,202 @@
+/* Grundinställningar & Navbar-fix */
+.detailsPage {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 20px 110px 20px; 
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+.backLink {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   HEADER-STYLING (Titel, Tagg, Beskrivning)
+   ========================================================================== */
+
+.recipeHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.titleRow h1 {
+  font-size: 2.6rem;
+  color: var(--color-primary-dark);
+  margin: 0;
+}
+
+.categoryTag {
+  background-color: var(--color-navigation-bg);
+  color: var(--color-primary-dark);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 500;
+  align-self: flex-start; /* Förhindrar att taggen blir jättebred */
+}
+
+.description {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 4px 0 0 0;
+  max-width: 800px;
+}
+
+/* ==========================================================================
+   LAYOUT GRID (Bild, Ingredienser, Instruktioner)
+   ========================================================================== */
+
+
+.mainLayoutGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+
+@media (min-width: 768px) {
+  .mainLayoutGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .imageWrapper {
+    grid-column: 1; 
+  }
+
+  .mainLayoutGrid > .section:nth-of-type(1) {
+    grid-column: 2;
+  }
+
+  .instructionsSection {
+    grid-column: 1 / span 2;
+  }
+}
+
+/* ==========================================================================
+   KOMPONENT-STYLING (Bild & Boxar)
+   ========================================================================== */
+
+.imageWrapper {
+  width: 100%;
+}
+
+.recipeImage {
+  width: 100%;
+  height: 100%;
+  max-height: 420px; 
+  object-fit: cover; 
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+}
+
+.section h2 {
+  color: var(--color-primary-dark);
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.ingredientsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ingredientItem {
+  display: flex;
+  justify-content: space-between; 
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-navigation-bg);
+  font-size: 1.05rem;
+}
+
+.ingredientItem:last-child {
+  border-bottom: none;
+}
+
+.amount {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.ingredientName {
+  color: var(--color-text);
+}
+
+.instructionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step-counter;
+}
+
+.instructionItem {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.instructionItem:last-child {
+  margin-bottom: 0;
+}
+
+.instructionItem::before {
+  counter-increment: step-counter;
+  content: counter(step-counter);
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.instructionItem p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.stateMessage {
+  text-align: center;
+  padding: 80px;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
