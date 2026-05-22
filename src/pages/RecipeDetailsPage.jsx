@@ -17,11 +17,11 @@ export default function RecipeDetailsPage() {
         const { data, error } = await supabase
           .from("recipes")
           .select(`
-          *,
-          categories (name),
-          ingredients (*),
-          instructions (*)
-        `)
+            *,
+            categories (name),
+            ingredients (*),
+            instructions (*)
+          `)
           .eq("id", id)
           .single();
 
@@ -62,61 +62,63 @@ export default function RecipeDetailsPage() {
   return (
     <main className={styles.detailsPage}>
       <Link to="/" className={styles.backLink}>← Tillbaka till alla efterrätter</Link>
-      <div className={styles.recipeHeader}>
+
+      {/* 1. TOPPEN: Titel, kategori, beskrivning och favoritknapp */}
+      <header className={styles.recipeHeader}>
+        <div className={styles.titleRow}>
+          <h1>{recipe.title}</h1>
+          <FavoriteButton recipeId={recipe.id} />
+        </div>
+        
         {recipe.categories?.name && (
           <span className={styles.categoryTag}>{recipe.categories.name}</span>
         )}
-        <div className={styles.titleWrapper}>
-          <h1>{recipe.title}</h1>
-
-
-          <FavoriteButton recipeId={recipe.id} />
-        </div>
+        
         <p className={styles.description}>{recipe.description}</p>
-      </div>
+      </header>
 
-      <div className={styles.gridContainer}>
-        {/* Left column: Image */}
+      {/* 2. LAYOUTEN: Bild, Ingredienser och Instruktioner */}
+      <div className={styles.mainLayoutGrid}>
+        
+        {/* Bildboxen */}
         <div className={styles.imageWrapper}>
           <img src={recipe.image_url} alt={recipe.title} className={styles.recipeImage} />
         </div>
 
-        {/* Right column: Ingredients & Instructions */}
-        <div className={styles.infoWrapper}>
-          <section className={styles.section}>
-            <h2>Ingredienser</h2>
-            {recipe.ingredients && recipe.ingredients.length > 0 ? (
-              <ul className={styles.ingredientsList}>
-                {recipe.ingredients.map((ing) => (
-                  <li key={ing.id} className={styles.ingredientItem}>
-                    {ing.amount && <span className={styles.amount}>{ing.amount} </span>}
-                    <span className={ing.name}>{ing.name}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>Ingredienser saknas för detta recept.</p>
-            )}
-          </section>
+        {/* Ingredienser */}
+        <section className={styles.section}>
+          <h2>Ingredienser</h2>
+          {recipe.ingredients && recipe.ingredients.length > 0 ? (
+            <ul className={styles.ingredientsList}>
+              {recipe.ingredients.map((ing) => (
+                <li key={ing.id} className={styles.ingredientItem}>
+                  {ing.amount && <span className={styles.amount}>{ing.amount} </span>}
+                  <span className={styles.ingredientName}>{ing.name}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Ingredienser saknas för detta recept.</p>
+          )}
+        </section>
 
-          <section className={styles.section}>
-            <h2>Gör så här</h2>
-            {recipe.instructions && recipe.instructions.length > 0 ? (
-              <ol className={styles.instructionsList}>
-                {recipe.instructions.map((step) => (
-                  <li key={step.id} className={styles.instructionItem}>
-                    <p>{step.description}</p>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <p>Instruktioner saknas för detta recept.</p>
-            )}
-          </section>
+        {/* Instruktioner / Gör så här */}
+        <section className={`${styles.section} ${styles.instructionsSection}`}>
+          <h2>Gör så här</h2>
+          {recipe.instructions && recipe.instructions.length > 0 ? (
+            <ol className={styles.instructionsList}>
+              {recipe.instructions.map((step) => (
+                <li key={step.id} className={styles.instructionItem}>
+                  <p>{step.description}</p>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p>Instruktioner saknas för detta recept.</p>
+          )}
+        </section>
 
-        </div>
       </div>
     </main>
-
-  )
+  );
 }
