@@ -64,12 +64,11 @@ export default function RecipeDetailsPage() {
     <main className={styles.detailsPage}>
       <Link to="/" className={styles.backLink}>← Tillbaka till alla efterrätter</Link>
 
-      {/* 1. TOPPEN: Titel, kategori, beskrivning och favoritknapp */}
       <header className={styles.recipeHeader}>
         <div className={styles.titleRow}>
           <h1>{recipe.title}</h1>
 
-          <div className={styles.actionButtons}> {/* En wrapper för att lägga knapparna på rad */}
+          <div className={styles.actionButtons}> 
           <FavoriteButton recipeId={recipe.id} />
           <DeleteButton recipeId={recipe.id} recipeOwnerId={recipe.created_by} />
   </div>
@@ -82,15 +81,12 @@ export default function RecipeDetailsPage() {
         <p className={styles.description}>{recipe.description}</p>
       </header>
 
-      {/* 2. LAYOUTEN: Bild, Ingredienser och Instruktioner */}
       <div className={styles.mainLayoutGrid}>
         
-        {/* Bildboxen */}
         <div className={styles.imageWrapper}>
           <img src={recipe.image_url} alt={recipe.title} className={styles.recipeImage} />
         </div>
 
-        {/* Ingredienser */}
         <section className={styles.section}>
           <h2>Ingredienser</h2>
           {recipe.ingredients && recipe.ingredients.length > 0 ? (
@@ -107,7 +103,6 @@ export default function RecipeDetailsPage() {
           )}
         </section>
 
-        {/* Instruktioner / Gör så här */}
         <section className={`${styles.section} ${styles.instructionsSection}`}>
           <h2>Gör så här</h2>
           {recipe.instructions && recipe.instructions.length > 0 ? (

@@ -9,7 +9,6 @@ const DeleteButton = ({ recipeId, recipeOwnerId }) => {
   const navigate = useNavigate();
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // KONTROLLEN: Om användaren inte är inloggad, eller INTE är skaparen av receptet -> rita inte ut någonting alls
   if (!user || user.id !== recipeOwnerId) {
     return null;
   }
@@ -21,9 +20,9 @@ const DeleteButton = ({ recipeId, recipeOwnerId }) => {
 
     try {
       setIsDeleting(true);
-      await recipesService.deleteRecipe(recipeId);
+      await deleteService.deleteRecipe(recipeId);
       
-      // Skicka användaren tillbaka till alla efterrätter efter lyckad borttagning
+    /* Send user back to recipelist after delete if sucessfull. */
       navigate('/');
     } catch (error) {
       alert("Kunde inte radera receptet. Försök igen.");

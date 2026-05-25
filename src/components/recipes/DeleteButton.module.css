@@ -1,12 +1,12 @@
 .deleteBtn {
   padding: 10px 16px;
-  border-radius: 50px; /* Matchar din favoritknapp! */
+  border-radius: 50px;
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: bold;
   font-size: 0.95rem;
   background-color: transparent;
-  /* Använd din var(--color-error) eller en mjuk röd varningsfärg */
+ 
   border: 1px solid #e53935;
   color: #e53935;
   display: inline-flex;
@@ -16,7 +16,7 @@
 
 .deleteBtn:hover:not(:disabled) {
   transform: scale(1.03);
-  background-color: #ffebee; /* Mjuk röd toning vid hover */
+  background-color: #ffebee;
   border-color: #d32f2f;
   color: #d32f2f;
 }

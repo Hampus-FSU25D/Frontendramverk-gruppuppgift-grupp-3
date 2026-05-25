@@ -1,3 +1,5 @@
+import { supabase } from "../lib/supabaseClient.js"
+
 export const deleteService = {
   /**
    * Will delete one specific recipe only if the userId and the created_by is matching. **
