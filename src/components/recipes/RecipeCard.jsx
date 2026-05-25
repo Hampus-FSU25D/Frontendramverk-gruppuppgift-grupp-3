@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./RecipeCard.module.css";
+import FavoriteButton from "./FavoriteButton" 
 
 export default function RecipeCard({ recipe }) {
   return (
@@ -16,6 +17,7 @@ export default function RecipeCard({ recipe }) {
                 {recipe.categories.name}
             </span>
         )}
+        <FavoriteButton recipeId={recipe.id} />
         <h2>{recipe.title}</h2>
         <p>{recipe.description}</p>
 
