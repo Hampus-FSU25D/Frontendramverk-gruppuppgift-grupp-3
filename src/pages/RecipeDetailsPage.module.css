@@ -20,10 +20,6 @@
   text-decoration: underline;
 }
 
-/* ==========================================================================
-   HEADER-STYLING (Titel, Tagg, Beskrivning)
-   ========================================================================== */
-
 .recipeHeader {
   display: flex;
   flex-direction: column;
@@ -62,17 +58,11 @@
   max-width: 800px;
 }
 
-/* ==========================================================================
-   LAYOUT GRID (Bild, Ingredienser, Instruktioner)
-   ========================================================================== */
-
-
 .mainLayoutGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
 }
-
 
 @media (min-width: 768px) {
   .mainLayoutGrid {
@@ -92,10 +82,6 @@
     grid-column: 1 / span 2;
   }
 }
-
-/* ==========================================================================
-   KOMPONENT-STYLING (Bild & Boxar)
-   ========================================================================== */
 
 .imageWrapper {
   width: 100%;
@@ -199,4 +185,9 @@
   padding: 80px;
   font-size: 1.2rem;
   color: var(--color-text-muted);
+}
+
+.actionButtons
+{
+  padding: 5px;
 }

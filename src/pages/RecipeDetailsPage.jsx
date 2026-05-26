@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+
 import FavoriteButton from "../components/recipes/FavoriteButton";
 import DeleteButton from "../components/recipes/DeleteButton";
+import EditButton from "../components/recipes/EditButton";
+
 import styles from "./RecipeDetailsPage.module.css";
+
 
 export default function RecipeDetailsPage() {
   const { id } = useParams();
@@ -70,7 +74,7 @@ export default function RecipeDetailsPage() {
 
           <div className={styles.actionButtons}> 
           <FavoriteButton recipeId={recipe.id} />
-          <DeleteButton recipeId={recipe.id} recipeOwnerId={recipe.created_by} />
+          
   </div>
 </div>
         
@@ -119,6 +123,9 @@ export default function RecipeDetailsPage() {
         </section>
 
       </div>
+      <div className={styles.actionButtons}>
+      <EditButton recipeId={recipe.id} recipeOwnerId={recipe.created_by }/>
+      <DeleteButton recipeId={recipe.id} recipeOwnerId={recipe.created_by} /></div>
     </main>
   );
 }
