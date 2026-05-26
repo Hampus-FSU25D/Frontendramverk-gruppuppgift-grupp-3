@@ -66,7 +66,7 @@ export default function RecipeDetailsPage() {
 
   return (
     <main className={styles.detailsPage}>
-      <Link to="/" className={styles.backLink}>← Tillbaka till alla efterrätter</Link>
+      <Link to="/recept" className={styles.backLink}>← Tillbaka till alla efterrätter</Link>
 
       <header className={styles.recipeHeader}>
         <div className={styles.titleRow}>
