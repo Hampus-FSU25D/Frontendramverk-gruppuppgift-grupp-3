@@ -1,8 +1,7 @@
-/* Grundinställningar & Navbar-fix */
+
 .detailsPage {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 10px 20px 110px 20px; 
   font-family: system-ui, -apple-system, sans-serif;
   color: var(--color-text);
   background-color: var(--color-background);
@@ -19,10 +18,6 @@
 .backLink:hover {
   text-decoration: underline;
 }
-
-/* ==========================================================================
-   HEADER-STYLING (Titel, Tagg, Beskrivning)
-   ========================================================================== */
 
 .recipeHeader {
   display: flex;
@@ -51,7 +46,7 @@
   border-radius: var(--radius-pill);
   font-size: 0.85rem;
   font-weight: 500;
-  align-self: flex-start; /* Förhindrar att taggen blir jättebred */
+  align-self: flex-start; 
 }
 
 .description {
@@ -61,11 +56,6 @@
   margin: 4px 0 0 0;
   max-width: 800px;
 }
-
-/* ==========================================================================
-   LAYOUT GRID (Bild, Ingredienser, Instruktioner)
-   ========================================================================== */
-
 
 .mainLayoutGrid {
   display: grid;
@@ -92,10 +82,6 @@
     grid-column: 1 / span 2;
   }
 }
-
-/* ==========================================================================
-   KOMPONENT-STYLING (Bild & Boxar)
-   ========================================================================== */
 
 .imageWrapper {
   width: 100%;
