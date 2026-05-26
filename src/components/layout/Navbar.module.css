@@ -5,8 +5,8 @@
   border-top: 2px solid var( --color-border);
   backdrop-filter: blur(8px);
   background-color: var(--color-navigation-bg);
-  padding: 0.3rem 0.6rem;
-  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6rem;
   position: fixed;
   left: 0;
   right: 0;
@@ -17,7 +17,7 @@
 .navList {
   display: flex; 
   list-style: none; 
-  gap: 6rem;
+  gap: 5rem;
   margin: 0;
   padding: 0;
 }
@@ -25,12 +25,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4rpx;
   text-align: center;
   text-decoration: none;
   color: var(--primary-green); 
   font-weight: 600;
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: 20px;
   transition: all 0.3s ease;
 }
@@ -39,7 +38,6 @@
   background-color: var(--color-primary-light);
   transform: translateY(-2px);
 }
-
 
 @media (max-width: 480px) {
   .mainNav {
@@ -56,7 +54,6 @@
     font-size: 0.65rem;
     padding: 6px 8px;
   }
-
   }
 
   .disabledLink {
