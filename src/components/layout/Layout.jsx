@@ -20,7 +20,9 @@ export default function Layout({ children }) {
         onLogout={signOut}
       />
       <main>{content}</main>
-      <Navbar />
+      <Navbar 
+      onLogin={() => setIsLoginOpen(true)}
+      />
       <Footer />
       <AuthModal
         isOpen={isLoginOpen}
