@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // 1. Importera useState
+import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth'; 
 import styles from './Navbar.module.css';
@@ -10,19 +10,17 @@ import favorite from '../../assets/favorite.png';
 export default function Navbar({ onLogin }) {
   const { isAuthenticated } = useAuth(); 
 
-  // 2. Skapa states för din lokala Navbar-toast
   const [toastMessage, setToastMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
 
   const handleProtectedClick = (e, message) => {
     if (!isAuthenticated) {
-      e.preventDefault(); // Stoppa länken från att hoppa till en annan sida
+      e.preventDefault(); 
       
-      // 3. Sätt meddelandet och aktivera toasten
       setToastMessage(message);
       setShowToast(true);
 
-      // 4. Stäng av toasten automatiskt efter 3 sekunder
+   
       setTimeout(() => {
         setShowToast(false);
       }, 3000);
@@ -31,7 +29,7 @@ export default function Navbar({ onLogin }) {
         if (onLogin) {
           onLogin(); 
         }
-      }, 800); // <-- Ändra denna siffra för att göra fördröjningen längre eller kortare
+      }, 800); 
     }
   };
 
@@ -45,7 +43,6 @@ export default function Navbar({ onLogin }) {
           <Link to="/recept"><img src={cookBook} width='35px' alt="Recept" />Recept</Link>
         </li>
 
-        {/* LÄGG TILL (Skyddad) */}
         <li className={!isAuthenticated ? styles.disabledListItem : ''}>
           <Link 
             to="/lagg-till" 
@@ -57,7 +54,6 @@ export default function Navbar({ onLogin }) {
           </Link>
         </li>
 
-        {/* FAVORITER (Skyddad) */}
         <li className={!isAuthenticated ? styles.disabledListItem : ''}>
           <Link 
             to="/favoriter" 
@@ -70,7 +66,6 @@ export default function Navbar({ onLogin }) {
         </li>
       </ul>
 
-      {/* 5. DIN TOAST: Denna ritas bara ut om showToast är true */}
       {showToast && (
         <div className={`${styles.toast} ${styles.toastError}`}>
           {toastMessage}
