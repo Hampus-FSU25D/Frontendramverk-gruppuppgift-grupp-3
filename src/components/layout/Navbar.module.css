@@ -5,7 +5,7 @@
   border-top: 2px solid var( --color-border);
   backdrop-filter: blur(8px);
   background-color: var(--color-navigation-bg);
-  padding: 0.5rem 1.5rem;
+  padding: 0.3rem 0.6rem;
   font-size: 0.7rem;
   position: fixed;
   left: 0;
@@ -55,5 +55,54 @@
   .navList li a {
     font-size: 0.65rem;
     padding: 6px 8px;
+  }
+
+  }
+
+  .disabledLink {
+  opacity: 0.5; 
+  cursor: not-allowed !important; 
+  }
+  .disabledListItem a:hover {
+  background-color: transparent !important;
+  transform: none !important;
+  }
+
+  /* Toast-behållaren för Navbaren */
+.toast {
+  position: absolute;
+  bottom: calc(100% + 15px); /* Placerar toasten 15px OVANFÖR navbaren */
+  left: 50%;
+  transform: translateX(-50%); /* Centrerar den perfekt horisontellt */
+  background-color: #333;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 20px; /* Runda, fina hörn som matchar ert tema */
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap; 
+  z-index: 1100; /* Ligger ovanför själva navbaren */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none; /* Gör att man inte råkar klicka på den */
+  
+  /* Animation som tonar in och skjuter upp den lätt */
+  animation: slideUpIn 0.3s ease forwards;
+}
+
+/* Din röda fel-färg som du använde på favoritknappen */
+.toastError {
+  background-color: var(--color-error); 
+  color: var(--color-surface);               
+  border: 1px solid var(--color-border-strong);
+}
+
+@keyframes slideUpIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px); /* Startar lite längre ner */
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0); /* Slutar på sin rätta plats */
   }
 }
