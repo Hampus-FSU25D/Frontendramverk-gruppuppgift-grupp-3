@@ -2,10 +2,13 @@
   background-color: #fff8f2;
   border-radius: 1px;
   overflow: hidden;
+  max-width: 400px;
 }
 .recipeImage {
   width: 100%;
-  height: 180px;
+  max-height: 400px;
+  max-width: 400px;
+  border-radius: 20px;
   object-fit: cover;
   display: block;
 }
@@ -15,11 +18,25 @@
 }
 .categoryTag {
   display: inline-block;
-  margin-bottom: 0.75rem;
+  margin: 0.75rem;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
   background-color: #f0d8c8;
   color: #4b2e2e;
   font-size: 0.85rem;
   font-weight: 600;
+}
+.recipeButton {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background-color: #CA6180; 
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+.recipeButton:hover {
+  background-color: #8e2b49;
 }

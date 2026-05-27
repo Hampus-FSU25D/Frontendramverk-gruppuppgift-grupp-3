@@ -1,0 +1,31 @@
+.deleteBtn {
+  padding: 10px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
+  font-size: 0.95rem;
+  background-color: transparent;
+ 
+  border: 1px solid #e53935;
+  color: #e53935;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  transform: scale(1.03);
+  background-color: #ffebee;
+  border-color: #d32f2f;
+  color: #d32f2f;
+}
+
+.deleteBtn:active {
+  transform: scale(0.97);
+}
+
+.deleteBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import RecipeList from "../components/recipes/RecipeList";
 import { useRandomRecipes } from "../hooks/useRandomRecipes";
+import dessertbokenLogo from "../assets/Dessertboken_logga_v1.svg";
 import styles from "./HomePage.module.css";
 
 const HERO_COPY = {
@@ -23,7 +24,13 @@ export default function HomePage() {
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
             <h1 id="home-title" className={styles.title}>
-              {HERO_COPY.title}
+              <span className={styles.srOnly}>{HERO_COPY.title}</span>
+              <img
+                className={styles.logo}
+                src={dessertbokenLogo}
+                alt=""
+                aria-hidden="true"
+              />
             </h1>
 
             <p className={styles.subtitle}>{HERO_COPY.subtitle}</p>

@@ -1,4 +1,4 @@
-# Dessertboken
+﻿# Dessertboken
 
 ## Projektbeskrivning
 
@@ -11,34 +11,54 @@ Målet är att bygga en enkel och tydlig webbapp där:
 - inloggade användare kan favoritmarkera recept
 - användare kan ta bort sina egna recept
 
-### Sidor
+## Sidor
 
-- **Startsida**: visar slumpade receptkort
-- **Receptlista**: visar alla recept
-- **Receptdetaljer**: visar information om ett recept samt delete-knapp för egna recept
-- **Favoriter**: visar användarens favoritmarkerade recept
-- **Lägg till recept**: formulär för att skapa nytt recept
+- **Startsida** (`HomePage`)
+- **Receptlista** (`RecipesPage`)
+- **Receptdetaljer** (`RecipeDetailsPage`)
+- **Favoriter** (`FavoritesPage`)
+- **Lägg till recept** (`AddRecipePage`)
+- **Redigera recept** (`EditRecipePage`)
+- **404-sida** (`NotFoundPage`)
 
-### Komponenter
+## Komponenter (byggda)
 
-- `Header` med logga eller namn samt logga in/logga ut-knapp
-- `Navbar` med länkar längst ner
+### Layout
+
+- `Layout`
+- `Header`
+- `Navbar`
+- `Footer`
+
+### Recept
+
 - `RecipeList`
-- `SearchBar / Filter`
 - `RecipeCard`
-- `AddRecipeForm` för att lägga till och redigera recept
 - `FavoriteButton`
+- `EditButton`
+- `DeleteButton`
+
+### Form/UI
+
+- `AddRecipeForm`
+- `SearchBar`
 - `Tags`
 
-### Struktur och arkitektur
+### Auth
 
-- `RecipeProvider` hanterar global data, till exempel recept och favoriter
-- `BrowserRouter` hanterar navigation mellan sidor
-- `Layout` innehåller `Header` och `Navbar`
-- `Pages` innehåller bland annat `RecipesPage`, `RecipeDetailsPage` och `AddRecipePage`
-- Shared components innehåller bland annat `RecipeList`, `RecipeCard` och `Tags`
+- `AuthModal`
+- `ProtectedRoute`
 
-### Wireframe / Mockup
+## Struktur och arkitektur
+
+- `AppRoutes` och `routes.jsx` hanterar routing med `react-router-dom`
+- `AuthContext` hanterar autentiseringstillstånd
+- custom hooks: `useAuth`, `useFavorite`, `useRandomRecipes`
+- service-lager: `favoritesService`, `deleteService`
+- `supabaseClient` för koppling mot Supabase
+- CSS Modules för komponent- och sidspecifik styling
+
+## Wireframe / Mockup
 
 [Öppna projektets wireframe i Stitch](https://stitch.withgoogle.com/projects/444867321747387746)
 
@@ -70,23 +90,31 @@ npm run build
 npm run preview
 ```
 
-Instruktionerna ovan är en startversion och kan uppdateras senare om projektstrukturen, verktygen eller arbetsflödet ändras.
-
 ## Tech Stack
 
-Följande tekniker används redan eller planeras att användas i projektet:
+### Frontend
 
-- `React`
-- `Vite`
-- `React Router`
-- `JavaScript`
-- `CSS Modules` eller annan scoped styling
+- `React 18`
+- `Vite 5`
+- `JavaScript (ES Modules)`
+- `React Router DOM 6`
+- `CSS Modules`
+
+### Backend / Data
+
+- `Supabase`
+- `@supabase/supabase-js`
+
+### Verktyg och arbetsflöde
+
+- `Node.js`
+- `npm`
 - `Git`
 - `GitHub`
 
-## Gruppmedlemmar
+## Gruppmedlemmar och ansvar
 
-- **Nahid Baninamrah**: ansvarar för `AddRecipe`, `SearchBar / Filter`, `AddRecipeForm` och `Tags`
-- **Sandra Granholm Englund**: ansvarar för `RecipeDetails`, delete-knapp för egna recept, `Navbar` och `FavoriteButton`
-- **Hanna Geifalk**: ansvarar för receptlista, favoritlista, `RecipeList` och `RecipeCard`
-- **Hampus Andersson**: ansvarar för startsida, `Header`, router, auth, supabase, grundstruktur, pipeline och rulesets
+- **Nahid Baninamrah**: `AddRecipePage`, `EditRecipePage`, `AddRecipeForm`, `SearchBar`, `Tags`
+- **Sandra Granholm Englund**: `RecipeDetailsPage`, `DeleteButton`, `EditButton`, `Navbar`, `FavoriteButton`
+- **Hanna Geifalk**: `RecipesPage`, `FavoritesPage`, `RecipeList`, `RecipeCard`
+- **Hampus Andersson**: `HomePage`, `Header`, `Footer`, routing (`AppRoutes`), auth-flöde (`AuthModal`, `ProtectedRoute`, `AuthContext`), Supabase-integration och projektstruktur

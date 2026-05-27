@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import AddRecipeForm from "../components/form/AddRecipeForm";
-
+import styles from "../styles/AddRecipeForm.module.css";
 const EditRecipePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -171,6 +171,10 @@ const EditRecipePage = () => {
 
   return (
     <div style={{ padding: "2rem", minHeight: "100vh", background: "#f9f9f9" }}>
+      {/* BACK LINK */}
+      <Link to={`/recept/${id}`} className={styles.backLink}>
+        ← Tillbaka till receptet
+      </Link>
       {showSuccess && (
         <div
           style={{
@@ -190,9 +194,7 @@ const EditRecipePage = () => {
           <p>Omdirigerar...</p>
         </div>
       )}
-      {/* <h1 style={{ textAlign: "center", color: "#CA6180" }}>
-        ✏️ Redigera recept
-      </h1> */}
+
       <AddRecipeForm
         onSubmit={handleUpdate}
         initialData={recipe}
@@ -201,4 +203,5 @@ const EditRecipePage = () => {
     </div>
   );
 };
+
 export default EditRecipePage;
