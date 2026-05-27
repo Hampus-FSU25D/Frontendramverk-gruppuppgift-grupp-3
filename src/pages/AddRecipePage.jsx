@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import AddRecipeForm from "../components/form/AddRecipeForm";
-
+import styles from "../styles/AddRecipeForm.module.css";
 const AddRecipePage = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -105,6 +105,10 @@ const AddRecipePage = () => {
 
   return (
     <div style={{ padding: "2rem", minHeight: "100vh", background: "#f9f9f9" }}>
+      {/* BACK LINK */}
+      <Link to="/recept" className={styles.backLink}>
+        ← Tillbaka till alla recept
+      </Link>
       {showSuccess && (
         <div
           style={{
